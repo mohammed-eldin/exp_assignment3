@@ -25,8 +25,8 @@ This architecture aims to put the robot on wheels in a simulated environment con
 #### Components
 * Human Interaction
 * Behaviour Controller
-* Movement Controller
-* Ball Following
+* Motion Controller
+* Ball Tracking
 
 #### Packages
 * move_base
@@ -40,7 +40,7 @@ The **Human Interaction** component simulates a human who can execute two action
 
 The **Behaviour Controller** The component contains a finite state machine, which is responsible for changing the behavior of the robot. This exposes the topic's state each time the topic  changes, allowing other components to change their behavior accordingly. The four actions are normal (first action), sleep, play, and search. Normal and Find also have substates, TrackNormal and TrackFind. More details can be found in the State Machines section.
 
-The **Movement Controller** The component handles the robot's motion when the behavior is set to Normal, Sleep, or Play. * / Behavior * Subscribe to the  topic  to get the current state of the state machine.
+The **Motion Controller** The component handles the robot's motion when the behavior is set to Normal, Sleep, or Play. * / Behavior * Subscribe to the  topic  to get the current state of the state machine.
 
 Under normal conditions, you would choose a random position in your environment, with the maximum dimensions of the simulated map being 8-8 for * y * and 6-6 for * x * at the x and y positions. Get a random number. Then send the target to the action server * move_base * and wait for it to reach the target. If the state changes when the goal has not yet been achieved, the callback of the * send_goal () * function aborts the current goal, allowing the robot to change its behavior immediately accordingly.
 
@@ -48,7 +48,7 @@ In sleep mode, the motion controller sends the home position (obtained from the 
 
 In the play state, you have two options. If the robot is not in front of a human, it will reach the human position (always use the * move_base * action server) and notify the * humanInteractiongenerator * node in * / human_reached. * The topic that it is in front of him and waits for the * go_to * command. If the robot receives a go_to command and its location is already known (stored in the ROS parameter server), the robot will move to that location, wait a random amount of time, then return to the human position, and another. Wait for the * go_to * command. If you don't know the location, it will be published in the * / no_room * topic and the behavior will change to * Find *.
  
-The **Ball Following** component implements the openCv algorithm to detect the ball (more precisely the color of the ball) and controls the robot movements in the *Track Normal* and *Track Find* behaviours. It subscribes to the robot camera topic (*/robot/camera1/image_raw/compressed*) and, inside the subscriber callback, it uses the OpenCv libraries to detect the balls in the environment. When a ball is detected and the robot is in the *Normal* or *Find* behaviour, it immediately sends a message on the */ball_detected* topic for the Behaviour controller. Since there are six balls of different colours and more than one could be detected at the same time, there is a function called *get_mask_colour()* that selects the bigger (and so closer) ball detected. Then the corresponding mask is created and when the state has transitioned from Find to Track Find or from Normal to Track Normal, the node publishes velocities to the */cmd_vel* topic in order to make the robot reach the closer ball position. At this point, the position of the ball is saved in the parameter server with the name of the color of the ball, and a message alerting the action controller is published to the  topic * / ball_reached *.
+The **Ball Tracking** component implements the openCv algorithm to detect the ball (more precisely the color of the ball) and controls the robot movements in the *Track Normal* and *Track Find* behaviours. It subscribes to the robot camera topic (*/robot/camera1/image_raw/compressed*) and, inside the subscriber callback, it uses the OpenCv libraries to detect the balls in the environment. When a ball is detected and the robot is in the *Normal* or *Find* behaviour, it immediately sends a message on the */ball_detected* topic for the Behaviour controller. Since there are six balls of different colours and more than one could be detected at the same time, there is a function called *get_mask_colour()* that selects the bigger (and so closer) ball detected. Then the corresponding mask is created and when the state has transitioned from Find to Track Find or from Normal to Track Normal, the node publishes velocities to the */cmd_vel* topic in order to make the robot reach the closer ball position. At this point, the position of the ball is saved in the parameter server with the name of the color of the ball, and a message alerting the action controller is published to the  topic * / ball_reached *.
 
 If the robot is in the Track Normal state, it returns to the Normal one.
 
