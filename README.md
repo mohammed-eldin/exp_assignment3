@@ -21,12 +21,6 @@ This architecture aims to put the robot on wheels in a simulated environment con
 <p align="center"> 
 <img src="https://github.com/FraPorta/Itslit/blob/master/exp_ass3_diagram.png?raw=true">
 </p>
-
-<img
-  src="/home/alaaeldin/Downloads/Untitled3.jpg"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
   
 #### Components
 * Human Interaction
