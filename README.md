@@ -115,8 +115,6 @@ Here the content of the folders contained in this repository is explained
 
 ### Config
 Contains the configuration file for Rviz
-### Documentation
-Contains the html documentation of the project (in order to see it, open the *index.html* file in a web browser like Chrome or Firefox)
 ### Launch
 Contains the required startup files. * gmapping.launch * and * move_base.launch * are used to launch the two packages from  other launch files.
  * Simulation.launch * opens Gazebo Simulation (create robots, humans, balls, and worlds) and Rviz and launches the * gmapping * package.
