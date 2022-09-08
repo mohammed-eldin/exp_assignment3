@@ -149,6 +149,8 @@ In order to run the system, you have to launch the two following launch files in
 
 ```console
 roslaunch exp_assignment3 simulation.launch
+```
+```console
 roslaunch exp_assignment3 scripts.launch 
 ```
 
