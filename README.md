@@ -18,7 +18,8 @@ This architecture aims to put the robot on wheels in a simulated environment con
 ## Software architecture and state diagram
 ### Architecture
 
-  
+![Assignment 3 - architecture](https://user-images.githubusercontent.com/25705086/189081874-9fc9cb88-79c1-41b6-8a14-d8c7b8cc7a20.jpg)
+
 #### Components
 * Human Interaction
 * Behaviour Controller
@@ -97,6 +98,8 @@ Parameters for rooms-colors correspondence:
 
 ### State Machine
 This is the state machine inside the Behaviour Controller component
+
+![Assignment 3 - state machine](https://user-images.githubusercontent.com/25705086/189082087-25b60605-122d-4c92-91c2-3c73e96f8977.png)
 
 The **Normal** The behavior consists of randomly moving  around the map. When the * ball_tracking * node detects a ball, it moves to the Track Normal substate. Otherwise, it will either transition to the * Play * state when * play_command * is received from the * human_interaction_gen * node, or randomly transition to the * state. * Sleep * state after at least 10 seconds of normal operation.
 
@@ -184,6 +187,8 @@ In normal motion, some random positions may be outside  the walls of the house, 
 
 ## Rqt_graph
 ### Main Architecture and Gazebo Simulation
+
+![rosgraph_assignment3_explore](https://user-images.githubusercontent.com/25705086/189082182-52b7ed3a-aadf-4736-939a-d074ddc08520.png)
 
 ## Author
 Mohamed Alaaeldin Youssef Mahmoud\
