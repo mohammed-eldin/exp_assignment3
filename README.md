@@ -186,7 +186,7 @@ In normal motion, some random positions may be outside  the walls of the house, 
 * Test the system with a more complex map to see if it works..
 
 ## Rqt_graph
-### Main Architecture and Gazebo Simulation
+### Main Architecture
 
 ![rosgraph_assignment3_explore](https://user-images.githubusercontent.com/25705086/189082182-52b7ed3a-aadf-4736-939a-d074ddc08520.png)
 
